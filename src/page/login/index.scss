@@ -1,11 +1,18 @@
 
+
 .login-panel{
   width: 380px;
   margin: 35% auto 0 auto;
 }
 
+.panel-body{
+  padding: 20px 20px 25px 20px;
+}
+
 .login-title{
-  color: rgba(244,67,54,.8)!important;
+  /*color: rgba(244,67,54,.8)!important;*/
+  color: #F0433D!important;
+  padding-left: 20px;
 }
 
 .btn-primary{

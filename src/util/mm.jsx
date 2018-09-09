@@ -10,10 +10,10 @@ class MUtil{
                 dataType  : param.dataType   || 'json',
                 data       : param.data       || null,
                 success    :res=> {
-                    if(0 === res.status){
+                    if(0 === res.code){
                         //数据请求成功
                         typeof resolve === 'function' && resolve(res.data,res.msg)
-                    }else if(10 === res.status){
+                    }else if(10 === res.code){
                         //没有登录，强制登录
                         this.doLogin();
                     }else {
@@ -48,6 +48,37 @@ class MUtil{
 
     successTips(errMsg){
         alert(errMsg || '操作成功~')
+    }
+
+    // 本地存储
+    setStorage(name, data){
+        let dataType = typeof data;
+        // json对象
+        if(dataType === 'object'){
+            window.localStorage.setItem(name, JSON.stringify(data));
+        }
+        // 基础类型
+        else if(['number','string','boolean'].indexOf(dataType) >= 0){
+            window.localStorage.setItem(name, data);
+        }
+        // 其他不支持的类型
+        else{
+            alert('该类型不能用于本地存储');
+        }
+    }
+    // 取出本地存储内容
+    getStorage(name){
+        let data = window.localStorage.getItem(name);
+        if(data){
+            return JSON.parse(data);
+        }
+        else{
+            return '';
+        }
+    }
+    // 删除本地存储
+    removeStorage(name){
+        window.localStorage.removeItem(name);
     }
 
 

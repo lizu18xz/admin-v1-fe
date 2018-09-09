@@ -91,6 +91,12 @@ module.exports = {
         //404找不到 访问此处
         historyApiFallback: {
             index: '/dist/index.html'
+        },
+        proxy : {
+            '/manager/user':{
+                target: 'http://localhost:8081',
+                changeOrigin: true
+            }
         }
     }
 
