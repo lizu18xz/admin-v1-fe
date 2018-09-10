@@ -1,0 +1,18 @@
+.jsoneditor-react-container {
+  width: 100%;
+  height: 100%;
+}
+
+.panel-body{
+  height: 600px;
+}
+
+.panel-footer{
+  text-align: right;
+  font-size: 18px;
+  font-weight: bold;
+  .warning{
+    color: red;
+  }
+}
+

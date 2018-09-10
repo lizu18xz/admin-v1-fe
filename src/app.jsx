@@ -6,6 +6,9 @@ import Layout from 'component/layout/index.jsx';
 
 import Home  from 'page/home/index.jsx';
 import Login from 'page/login/index.jsx';
+import Task from "page/task/index.jsx";
+import ActuatorList from "page/actuators/index.jsx";
+import ErrorPage from "page/error/index.jsx";
 
 class App extends React.Component{
 
@@ -18,6 +21,10 @@ class App extends React.Component{
                         <Layout>
                             <Switch>
                                 <Route exact path="/" component={Home} />
+                                <Route path="/task" component={Task}/>
+                                <Route path="/actuator/index" component={ActuatorList}/>
+                                <Redirect exact from="/actuator" to="/actuator/index"/>
+                                <Route component={ErrorPage}/>
                             </Switch>
                         </Layout>
                     )} />

@@ -31,10 +31,10 @@ class NavSide extends React.Component{
                             </Link>
                             <ul className="nav nav-second-level collapse in">
                                 <li>
-                                    <NavLink to="/product" activeClassName="active-menu" >执行器管理</NavLink>
+                                    <NavLink to="/actuator" activeClassName="active-menu" >执行器管理</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/product2" activeClassName="active-menu" >任务管理</NavLink>
+                                    <NavLink to="/task" activeClassName="active-menu" >任务管理</NavLink>
                                 </li>
 
                             </ul>
