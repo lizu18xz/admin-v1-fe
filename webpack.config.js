@@ -96,6 +96,14 @@ module.exports = {
             '/manager/user':{
                 target: 'http://localhost:8081',
                 changeOrigin: true
+            },
+            '/manager/jobGroup':{
+                target: 'http://localhost:8081',
+                changeOrigin: true
+            },
+            '/manager/job':{
+                target: 'http://localhost:8081',
+                changeOrigin: true
             }
         }
     }

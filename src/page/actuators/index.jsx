@@ -1,5 +1,6 @@
 import React from 'react';
 import {  Link } from 'react-router-dom'
+import './index.scss';
 import PageTitle from 'component/page-title/index.jsx'
 import Pagination  from 'util/pagination/index.jsx'
 import Actuator from 'service/actuator-service.jsx';
@@ -13,7 +14,7 @@ class ActuatorList extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            list:[],
+            content:[],
             pageNum:1
         }
     }
@@ -23,14 +24,14 @@ class ActuatorList extends React.Component{
     }
 
     loadActuatorList(){
-       /* _actuator.getActuatorList({}).then(res=>{
+        _actuator.getActuatorList(this.state.pageNum).then(res=>{
               this.setState(res)
         },errMsg=>{
             this.setState({
-                list:[]
+                content:[]
             })
             _mm.errorTips(errMsg)
-        });*/
+        });
     }
 
     //页码变化
@@ -46,27 +47,40 @@ class ActuatorList extends React.Component{
         return (
             <div id="page-wrapper">
 
-                <PageTitle title="执行器列表"/>
+                <PageTitle title="执行器列表">
 
-                <TableList tableHeads={['ID','执行器名称','执行器类型','创建者','创建时间']}>
+                    <div className="page-header-right">
+                        <Link to="/" className="btn btn-primary">
+                            <i className="fa fa-plus"></i>
+                            <span>添加执行器</span>
+                        </Link>
+                    </div>
+
+                </PageTitle>
+
+                <TableList tableHeads={['ID','执行器名称','执行器类型','创建时间','修改时间','操作']}>
                     {
-                        this.state.list.map((actuator,index)=>{
+                        this.state.content.map((actuator,index)=>{
                             return(
                                 <tr key={index}>
-                                    {/*<td>{user.id}</td>
-                                    <td>{user.username}</td>
-                                    <td>{user.email}</td>
-                                    <td>{user.phone}</td>
-                                    <td>{new Date(user.createTime).toLocaleString()}</td>*/}
+                                        <td>{actuator.id}</td>
+                                        <td>{actuator.name}</td>
+                                        <td>{actuator.groupDesc}</td>
+                                        <td>{new Date(actuator.createTime).toLocaleString()}</td>
+                                        <td>{new Date(actuator.updateTime).toLocaleString()}</td>
+                                        <td>
+                                            <a className="operation btn btn-xs btn-info" >详情</a>
+
+                                            <a className="operation btn btn-xs btn-success" >编辑</a>
+                                        </td>
                                 </tr>
                             );
                         })
                     }
                 </TableList>
 
-                <Pagination current={11} total={200} onChange={(pageNum)=>{console.log(pageNum)}}/>
-                {/* <Pagination current={this.state.pageNum} total={this.state.total}
-                                onChange={(pageNum) =>{this.onPageNumChange(pageNum)}}/>*/}
+                <Pagination current={(this.state.number+1)} total={this.state.totalElements}
+                                onChange={(pageNum) =>{this.onPageNumChange((pageNum))}}/>
             </div>
         );
     }

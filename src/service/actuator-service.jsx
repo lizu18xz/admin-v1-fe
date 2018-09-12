@@ -3,11 +3,13 @@ const _mm     =new MUtil();
 
 class Actuator{
 
-    getActuatorList(params){
+    getActuatorList(pageNum){
         return _mm.request({
             type: 'post',
-            url:'/manager/user/login',
-            data:params
+            url:'/manager/jobGroup/list',
+            data:{
+                page:pageNum
+            }
         })
     }
 
