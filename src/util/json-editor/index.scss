@@ -4,7 +4,8 @@
 }
 
 .panel-body{
-  height: 600px;
+  height: 385px;
+  padding: 0;
 }
 
 .panel-footer{
@@ -16,3 +17,11 @@
   }
 }
 
+div.jsoneditor{
+  border: 1px solid #c9d8db !important;
+}
+
+.jsoneditor-menu{
+    background: #449d44!important;
+    border-bottom: 1px solid #eeeeee!important;
+  }

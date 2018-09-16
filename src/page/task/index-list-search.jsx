@@ -12,23 +12,21 @@ class ListSearch extends React.Component{
 
 
     onSearch(){
-        console.log("查询")
+        console.log("查询"+this.state.executorName)
         this.props.onSearch(this.state.executorName)
     }
 
     //选择执行器后的select事件
     onChangeValue(e){
-        console.log("change")
         let name=e.target.name,
             value=e.target.value.trim();
 
         this.setState({
             [name]:value
+        },e=>{
+           this.onSearch();
         })
-
-        this.onSearch();
     }
-
 
     render() {
         return (
@@ -37,9 +35,15 @@ class ListSearch extends React.Component{
                     <div className="form-inline">
                         <div className="form-group">
                             <select className="form-control select-items"
-                                    name="executorType" onChange={(e)=>this.onChangeValue(e)}>
-                                <option value="执行器名称1">执行器名称1</option>
-                                <option value="执行器名称1">执行器名称2</option>
+                                    name="executorName" onChange={(e)=>this.onChangeValue(e)}>
+                                {/*<option  value="请选择执行器">请选择执行器</option>*/}
+                                {
+                                    this.props.selectContent.map((selects,index)=>{
+                                        return(
+                                            <option key={index} value={selects.name}>{selects.name}</option>
+                                        );
+                                    })
+                                }
                             </select>
                         </div>
 

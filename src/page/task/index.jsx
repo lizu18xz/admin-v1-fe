@@ -12,25 +12,45 @@ const _task   =new Task();
 
 class TaskList extends React.Component{
 
-
     constructor(props){
         super(props);
         this.state={
             content:[],
-            pageNum:1
+            pageNum:1,
+            executorContent:[],
+            executorType:''
         }
     }
 
     componentDidMount(){
-        this.loadTaskList();
+        //加载所有的执行器
+        this.loadTaskExecutor();
     }
 
-    loadTaskList(){
+    //加载执行器 TODO 初始化对应的内容
+    loadTaskExecutor(){
+        _task.getTaskExecutor().then(res=>{
+            this.setState({
+                executorContent:res.content
+            },(e)=>{
+                let executors=res.content;
+                this.setState({
+                    executorType: executors[0].name
+                },(e)=>{
+                    this.loadTaskList()
+                })
+            })
+        },errMsg=>{
+            _mm.errorTips(errMsg)
+        });
+    }
 
+    //加载对应执行器下面的任务
+    loadTaskList(){
         let listParam={
             page:this.state.pageNum,
+            executorType: this.state.executorType
         }
-
         _task.getTaskList(listParam).then(res=>{
             this.setState(res)
         },errMsg=>{
@@ -41,10 +61,9 @@ class TaskList extends React.Component{
         });
     }
 
-
     //搜索(选择执行器或者输入关键词进行搜索)
     onSearch(executorName){
-        console.log("start")
+        console.log("start:"+executorName)
         this.setState({
             pageNum :1,
             executorType:executorName
@@ -52,7 +71,6 @@ class TaskList extends React.Component{
             this.loadTaskList();
         })
     }
-
 
     //页码变化
     onPageNumChange(pageNum){
@@ -62,7 +80,6 @@ class TaskList extends React.Component{
             this.loadTaskList();
         });
     }
-
 
     render() {
         return (
@@ -79,7 +96,7 @@ class TaskList extends React.Component{
 
                 </PageTitle>
 
-                <ListSearch onSearch={(executorName)=>{this.onSearch(executorName)}}/>
+                <ListSearch onSearch={(executorName)=>{this.onSearch(executorName)}}  selectContent={this.state.executorContent} />
 
                 <TableList tableHeads={['ID','任务描述','执行器类型','状态','任务类型','创建时间','修改时间','操作']}>
                     {

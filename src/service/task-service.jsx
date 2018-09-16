@@ -11,6 +11,23 @@ class Task{
         })
     }
 
+    save(jobInfo){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/save',
+            data:jobInfo
+        })
+    }
+
+
+    getTaskExecutor(){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/jobGroup/list'
+        })
+    }
+
+
 }
 
 export default Task;
