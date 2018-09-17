@@ -13,6 +13,8 @@ class ListSearch extends React.Component{
 
     onSearch(){
         console.log("查询"+this.state.executorName)
+
+        //let data=this.state.executorName.split("_");//获取id
         this.props.onSearch(this.state.executorName)
     }
 
@@ -40,7 +42,7 @@ class ListSearch extends React.Component{
                                 {
                                     this.props.selectContent.map((selects,index)=>{
                                         return(
-                                            <option key={index} value={selects.name}>{selects.name}</option>
+                                            <option key={index} value={selects.name} >{selects.name}</option>
                                         );
                                     })
                                 }

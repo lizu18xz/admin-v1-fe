@@ -13,6 +13,17 @@ class Actuator{
         })
     }
 
+
+    //新增
+    save(groupInfo){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/jobGroup/save',
+            data:groupInfo
+        })
+    }
+
+
 }
 
 export default Actuator;

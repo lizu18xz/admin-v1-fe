@@ -16,7 +16,7 @@ class TaskSave extends React.Component{
             jobGroup:'',
             cron:'',
             jobDesc:'',
-            executorType:'',
+            executorType:this.props.match.params.type,
             jobType:'',
             jobLoadBalance:'',
             jobHa:'',
@@ -24,6 +24,7 @@ class TaskSave extends React.Component{
             jobConfig:'',
             text: JSON.stringify({}, null, 2),
         }
+
     }
 
     componentDidMount(){
@@ -90,12 +91,11 @@ class TaskSave extends React.Component{
             startAt:this.state.startAt,
             jobConfig:this.state.jobConfig
             }
-       console.log(jobInfo)
        //TODO 表单验证
        //提交信息
         _task.save(jobInfo).then((res)=>{
             _mm.successTips(res);
-            //this.props.history.push('/product/index');
+            this.props.history.push('/task/index');
         },(errMsg)=>{
             _mm.errorTips(errMsg);
         });
@@ -133,8 +133,7 @@ class TaskSave extends React.Component{
                             <select className="form-control save-selector"
                                     value={this.state.executorType}
                                     onChange={(e) => this.onExecutorTypeChange(e)}>
-                                <option value="">请选择执行器类型</option>
-                                <option value="DATAX">DATAX</option>
+                                <option value={this.state.executorType}>{this.state.executorType}</option>
                             </select>
                         </div>
                     </div>
@@ -185,15 +184,21 @@ class TaskSave extends React.Component{
                         </div>
                     </div>
 
-                    <div className="form-group">
-                        <label  className="col-md-2 control-label">JSON配置文件</label>
-                        <div className="col-md-10">
-                            <JSONEditor
-                                text={this.state.text}
-                                onChangeText={(text) =>{this.onChangeText((text))}}
-                            />
-                        </div>
-                    </div>
+                    {
+                        this.state.executorType == "DATAX"?
+                            <div className="form-group">
+                                <label  className="col-md-2 control-label">JSON配置文件</label>
+                                <div className="col-md-10">
+                                    <JSONEditor
+                                        text={this.state.text}
+                                        onChangeText={(text) =>{this.onChangeText((text))}}
+                                    />
+                                </div>
+                            </div>:''
+
+                    }
+
+
 
                     <div className="form-group">
                         <div className="col-sm-offset-2 col-sm-10">

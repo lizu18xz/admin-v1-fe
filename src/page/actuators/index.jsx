@@ -50,7 +50,7 @@ class ActuatorList extends React.Component{
                 <PageTitle title="执行器列表">
 
                     <div className="page-header-right">
-                        <Link to="/" className="btn btn-primary">
+                        <Link to="/actuator/save" className="btn btn-primary">
                             <i className="fa fa-plus"></i>
                             <span>添加执行器</span>
                         </Link>

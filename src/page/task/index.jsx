@@ -17,8 +17,8 @@ class TaskList extends React.Component{
         this.state={
             content:[],
             pageNum:1,
-            executorContent:[],
-            executorType:''
+            executorContent:[], //执行器列表
+            executorType:'',    //执行器类型
         }
     }
 
@@ -63,7 +63,6 @@ class TaskList extends React.Component{
 
     //搜索(选择执行器或者输入关键词进行搜索)
     onSearch(executorName){
-        console.log("start:"+executorName)
         this.setState({
             pageNum :1,
             executorType:executorName
@@ -81,14 +80,47 @@ class TaskList extends React.Component{
         });
     }
 
+    onSetTaskStatus(e,jobId,jobGroupId,status){
+        let newStatus    = status,
+            confirmTips  = status ==1
+                ?'确定要下线该任务?':'确定要上线该任务?';
+
+        let JobInfoParams={
+            jobId:jobId,
+            jobGroup:jobGroupId
+        }
+
+        if(window.confirm(confirmTips)){
+           if(newStatus==1){//现在是上线状态 调用下线接口
+               _task.pause(JobInfoParams).then(res=>{
+                   this.loadTaskList();
+               },errMsg=>{
+                   _mm.errorTips(errMsg)
+               });
+
+           }else if(newStatus == 2){//现在是下线状态 调用上线接口
+
+               _task.resume(JobInfoParams).then(res=>{
+                   this.loadTaskList();
+               },errMsg=>{
+                   _mm.errorTips(errMsg)
+               });
+           }
+        }
+    }
+
+
     render() {
+
+
+
         return (
             <div id="page-wrapper">
 
                 <PageTitle title="任务列表">
 
                     <div className="page-header-right">
-                        <Link to="/task/save" className="btn btn-primary">
+                        <Link to={`/task/save/${this.state.executorType}`} className="btn btn-primary">
                             <i className="fa fa-plus"></i>
                             <span>添加任务</span>
                         </Link>
@@ -113,7 +145,9 @@ class TaskList extends React.Component{
                                     <td>
                                         <a className="operation btn btn-xs btn-info">详情</a>
                                         <a className="operation btn btn-xs btn-success">编辑</a>
-                                        <a className="operation btn btn-xs btn-success">暂停</a>
+                                        <button className="operation btn btn-xs btn-success" onClick={(e)=>this.onSetTaskStatus(e,task.id,task.jobGroup,task.jobStatus)}>
+                                            {task.jobStatus == 1 ? '下线':'上线'}
+                                        </button>
                                         <a className="operation btn btn-xs btn-success">删除</a>
                                     </td>
                                 </tr>

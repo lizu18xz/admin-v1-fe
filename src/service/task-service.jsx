@@ -11,6 +11,7 @@ class Task{
         })
     }
 
+    //新增任务
     save(jobInfo){
         return _mm.request({
             type: 'post',
@@ -24,6 +25,33 @@ class Task{
         return _mm.request({
             type: 'post',
             url:'/manager/jobGroup/list'
+        })
+    }
+
+    //暂停任务
+    pause(JobInfoParams){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/pause',
+            data:JobInfoParams
+        })
+    }
+
+    //唤醒任务
+    resume(JobInfoParams){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/resume',
+            data:JobInfoParams
+        })
+    }
+
+    //任务详情
+    detail(JobInfoParams){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/delete',
+            data:JobInfoParams
         })
     }
 
