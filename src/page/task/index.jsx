@@ -34,11 +34,13 @@ class TaskList extends React.Component{
                 executorContent:res.content
             },(e)=>{
                 let executors=res.content;
-                this.setState({
-                    executorType: executors[0].name
-                },(e)=>{
-                    this.loadTaskList()
-                })
+                if(executors.length>0){
+                    this.setState({
+                        executorType: executors[0].name
+                    },(e)=>{
+                        this.loadTaskList()
+                    })
+                }
             })
         },errMsg=>{
             _mm.errorTips(errMsg)
