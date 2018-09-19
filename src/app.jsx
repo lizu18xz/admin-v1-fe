@@ -10,6 +10,7 @@ import TaskList from "page/task/index.jsx";
 import TaskSave from "page/task/save.jsx";
 import ActuatorList from "page/actuators/index.jsx";
 import ActuatorSave from "page/actuators/save.jsx";
+import OperationList from "page/operation/index.jsx";
 import ErrorPage from "page/error/index.jsx";
 
 class App extends React.Component{
@@ -26,9 +27,14 @@ class App extends React.Component{
                                 <Route path="/task/index" component={TaskList}/>
                                 <Route path="/task/save/:type?" component={TaskSave}/>
                                 <Redirect exact from="/task" to="/task/index"/>
+
                                 <Route path="/actuator/index" component={ActuatorList}/>
                                 <Route path="/actuator/save" component={ActuatorSave}/>
                                 <Redirect exact from="/actuator" to="/actuator/index"/>
+
+                                <Route path="/operation/index" component={OperationList}/>
+                                <Redirect exact from="/operation" to="/operation/index"/>
+
                                 <Route component={ErrorPage}/>
                             </Switch>
                         </Layout>

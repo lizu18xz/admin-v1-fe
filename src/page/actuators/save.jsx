@@ -13,7 +13,8 @@ class ActuatorSave extends React.Component{
         //定义执行器信息
         this.state={
             name:'',
-            groupDesc:''
+            groupDesc:'',
+            seq:''
         }
     }
 
@@ -36,6 +37,7 @@ class ActuatorSave extends React.Component{
         let groupInfo={
             name:this.state.name,
             groupDesc:this.state.groupDesc,
+            seq:this.state.seq
         }
         //TODO 表单验证
         //提交信息
@@ -69,6 +71,17 @@ class ActuatorSave extends React.Component{
                                    placeholder="请输入执行器描述"
                                    name="groupDesc"
                                    value={this.state.groupDesc}
+                                   onChange={(e)=>this.onValueChange(e)}/>
+                        </div>
+                    </div>
+
+                    <div className="form-group">
+                        <label  className="col-md-2 control-label">执行器顺序</label>
+                        <div className="col-md-5">
+                            <input type="text" className="form-control"
+                                   placeholder="顺序"
+                                   name="seq"
+                                   value={this.state.seq}
                                    onChange={(e)=>this.onValueChange(e)}/>
                         </div>
                     </div>

@@ -20,6 +20,7 @@ class TaskSave extends React.Component{
             jobType:'',
             jobLoadBalance:'',
             jobHa:'',
+            retries:'',
             startAt:'',
             jobConfig:'',
             text: JSON.stringify({}, null, 2),
@@ -88,6 +89,7 @@ class TaskSave extends React.Component{
             jobType:this.state.jobType,
             jobLoadBalance:this.state.jobLoadBalance,
             jobHa:this.state.jobHa,
+            retries:this.state.retries,
             startAt:this.state.startAt,
             jobConfig:this.state.jobConfig
             }
@@ -175,6 +177,21 @@ class TaskSave extends React.Component{
                         </div>
                     </div>
 
+                    {
+                        this.state.jobHa == "2" ?
+                            <div className="form-group">
+                                <label  className="col-md-2 control-label">重试次数</label>
+                                <div className="col-md-5">
+                                    <input type="text" className="form-control"
+                                           placeholder="请输入重试次数,默认不重试"
+                                           name="retries"
+                                           value={this.state.retries}
+                                           onChange={(e)=>this.onValueChange(e)}/>
+                                </div>
+                            </div>:""
+                    }
+
+
                     <div className="form-group">
                         <label  className="col-md-2 control-label">第一次任务开始时间</label>
                         <div className="col-md-5">
@@ -199,7 +216,6 @@ class TaskSave extends React.Component{
                             </div>:''
 
                     }
-
 
 
                     <div className="form-group">
