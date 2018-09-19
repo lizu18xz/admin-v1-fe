@@ -180,7 +180,9 @@ class TaskSave extends React.Component{
                         <div className="col-md-5">
                             <input type="text" className="form-control"
                                    placeholder="请输入第一次任务开始时间"
-                                   name="startAt"/>
+                                   name="startAt"
+                                   value={this.state.startAt}
+                                   onChange={(e)=>this.onValueChange(e)}/>
                         </div>
                     </div>
 
