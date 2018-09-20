@@ -161,6 +161,7 @@ class TaskSave extends React.Component{
                                 <option value="2">随机</option>
                                 <option value="3">轮训</option>
                                 <option value="4">权重</option>
+                                <option value="5">低并发度优先</option>
                             </select>
                         </div>
                     </div>
