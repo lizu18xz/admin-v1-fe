@@ -10,6 +10,15 @@ class Operation{
             data:listParam
         })
     }
+
+    getLog(listParam){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/jobLog/loadLog',
+            data:listParam
+        })
+    }
+
 }
 
 export default Operation;

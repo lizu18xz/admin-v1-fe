@@ -5,17 +5,20 @@ import PageTitle from 'component/page-title/index.jsx'
 import Pagination  from 'util/pagination/index.jsx'
 import Operation from 'service/oper-service.jsx';
 import TableList from "util/table-list/index.jsx";
+import ListSearch from "page/operation/index-list-search.jsx";
 import MUtil from 'util/mm.jsx';
 const _mm     =new MUtil();
 const _operation=new Operation();
 
-class ActuatorList extends React.Component{
+class OperationList extends React.Component{
 
     constructor(props){
         super(props);
         this.state={
             content:[],
-            pageNum:1
+            pageNum:1,
+            remoteIp:'',
+            jobDesc:''
         }
     }
 
@@ -26,7 +29,9 @@ class ActuatorList extends React.Component{
     loadOperationList(){
 
         let listParam={
-            pageNum:this.state.pageNum
+            page:this.state.pageNum,
+            remoteIp: this.state.remoteIp,
+            jobDesc: this.state.jobDesc
         }
 
         _operation.getOperationList(listParam).then(res=>{
@@ -37,6 +42,31 @@ class ActuatorList extends React.Component{
             })
             _mm.errorTips(errMsg)
         });
+    }
+
+    //搜索
+    onSearch(remoteIp,jobDesc){
+        this.setState({
+            pageNum :1,
+            remoteIp: remoteIp,
+            jobDesc: jobDesc
+        },()=>{
+            this.loadOperationList();
+        })
+    }
+
+    //详情
+    loadLogInfo(e,executorAddress,logId){
+        let listParam={
+            executorAddress: executorAddress,
+            logId: logId
+        }
+        _operation.getLog(listParam).then(res=>{
+            console.log(res)
+        },errMsg=>{
+            _mm.errorTips(errMsg)
+        });
+
     }
 
     //页码变化
@@ -54,6 +84,8 @@ class ActuatorList extends React.Component{
 
                 <PageTitle title="任务管理"/>
 
+                <ListSearch onSearch={(remoteIp,jobDesc)=>{this.onSearch(remoteIp,jobDesc)}}/>
+
                 <TableList tableHeads={['任务描述','执行机器','任务ID','创建时间','修改时间','操作']}>
                     {
                         this.state.content.map((jobLog,index)=>{
@@ -65,9 +97,10 @@ class ActuatorList extends React.Component{
                                     <td>{new Date(jobLog.createTime).toLocaleString()}</td>
                                     <td>{new Date(jobLog.updateTime).toLocaleString()}</td>
                                     <td>
-                                        <a className="operation btn btn-xs btn-info" >详情</a>
+                                        <a className="operation btn btn-xs btn-info">详情</a>
 
-                                        <a className="operation btn btn-xs btn-success" >编辑</a>
+                                        <button className="operation btn btn-xs btn-success"
+                                           onClick={(e)=>this.loadLogInfo(e,jobLog.remoteIp,jobLog.id)}>日志</button>
                                     </td>
                                 </tr>
                             );
@@ -82,4 +115,4 @@ class ActuatorList extends React.Component{
     }
 }
 
-export default ActuatorList;
+export default OperationList;
