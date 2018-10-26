@@ -55,6 +55,18 @@ class Task{
         })
     }
 
+    //任务详情
+    runTask(jobId){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/trigger',
+            data:{
+                jobId:jobId
+            }
+        })
+    }
+
+
 
 }
 

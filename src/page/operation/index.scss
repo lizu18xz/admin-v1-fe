@@ -15,3 +15,38 @@
 .table-list table td{
   vertical-align: middle!important;
 }
+
+
+.Modal {
+  position: absolute;
+  top: 150px;
+  left: 40px;
+  right: 40px;
+  border: 0;
+  outline: none;
+}
+
+.Overlay {
+  position: fixed;
+  top: 0;
+  left: 260px;
+  right: 0;
+  bottom: 0;
+}
+
+
+@media(max-width:768px) {
+
+  .Modal {
+    position: absolute;
+    left: 40px;
+    right: 40px;
+  }
+
+  .Overlay {
+    position: fixed;
+    left: 0px;
+    right: 0;
+  }
+}
+

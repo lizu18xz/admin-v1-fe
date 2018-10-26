@@ -112,6 +112,16 @@ class TaskList extends React.Component{
     }
 
 
+    runTask(jobId){
+        _task.runTask(jobId).then(res=>{
+            _mm.successTips("执行成功")
+        },errMsg=>{
+            _mm.errorTips(errMsg)
+        });
+    }
+
+
+
     render() {
 
 
@@ -132,7 +142,7 @@ class TaskList extends React.Component{
 
                 <ListSearch onSearch={(executorName)=>{this.onSearch(executorName)}}  selectContent={this.state.executorContent} />
 
-                <TableList tableHeads={['ID','任务描述','执行器类型','状态','任务类型','创建时间','修改时间','操作']}>
+                <TableList tableHeads={['ID','任务描述','执行器类型','状态','任务类型','Cron','创建时间','操作']}>
                     {
                         this.state.content.map((task,index)=>{
                             return(
@@ -142,8 +152,8 @@ class TaskList extends React.Component{
                                     <td>{task.executorType}</td>
                                     <td>正常</td>
                                     <td>{task.jobType}</td>
+                                    <td>{task.cron}</td>
                                     <td>{new Date(task.createTime).toLocaleString()}</td>
-                                    <td>{new Date(task.updateTime).toLocaleString()}</td>
                                     <td>
                                         <a className="operation btn btn-xs btn-info">详情</a>
                                         <a className="operation btn btn-xs btn-success">编辑</a>
@@ -151,6 +161,7 @@ class TaskList extends React.Component{
                                             {task.jobStatus == 1 ? '下线':'上线'}
                                         </button>
                                         <a className="operation btn btn-xs btn-success">删除</a>
+                                        <a className="operation btn btn-xs btn-success" onClick={(e)=>this.runTask(task.id)}>执行</a>
                                     </td>
                                 </tr>
                             );

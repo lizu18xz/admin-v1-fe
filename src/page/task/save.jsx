@@ -46,7 +46,7 @@ class TaskSave extends React.Component{
     //onValueChange 简单字段的改变
     onValueChange(e){
         let name=e.target.name,
-            value=e.target.value.trim();
+            value=e.target.value;
         this.setState({
             [name]:value
         })

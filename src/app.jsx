@@ -11,6 +11,7 @@ import TaskSave from "page/task/save.jsx";
 import ActuatorList from "page/actuators/index.jsx";
 import ActuatorSave from "page/actuators/save.jsx";
 import OperationList from "page/operation/index.jsx";
+import LogPage from "page/operation/log.jsx";
 import ErrorPage from "page/error/index.jsx";
 
 class App extends React.Component{
@@ -33,6 +34,7 @@ class App extends React.Component{
                                 <Redirect exact from="/actuator" to="/actuator/index"/>
 
                                 <Route path="/operation/index" component={OperationList}/>
+                                <Route path="/operation/log/:logId?" component={LogPage}/>
                                 <Redirect exact from="/operation" to="/operation/index"/>
 
                                 <Route component={ErrorPage}/>

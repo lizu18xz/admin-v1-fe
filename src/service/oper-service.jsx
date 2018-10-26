@@ -19,6 +19,16 @@ class Operation{
         })
     }
 
+    detail(logId){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/jobLog/detail',
+            data:{
+                logId:logId
+            }
+        })
+    }
+
 }
 
 export default Operation;
