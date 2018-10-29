@@ -24,6 +24,28 @@ class Actuator{
     }
 
 
+    detail(id){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/jobGroup/detail',
+            data:{
+                id:id
+            }
+        })
+    }
+
+    delete(id){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/jobGroup/delete',
+            data:{
+                id:id
+            }
+        })
+    }
+
+
+
 }
 
 export default Actuator;

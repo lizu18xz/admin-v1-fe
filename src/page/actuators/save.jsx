@@ -14,12 +14,27 @@ class ActuatorSave extends React.Component{
         this.state={
             name:'',
             groupDesc:'',
-            seq:''
+            seq:'',
+            id:this.props.match.params.id,
         }
     }
 
     componentDidMount(){
+        this.loadActuators();
+    }
 
+    loadActuators(){
+        console.log(this.state.id)
+        //有id时候，编辑 功能需要表单回填
+        if(this.state.id){
+            _actuator.detail(this.state.id).then(res=>{
+
+                this.setState(res);
+
+            },errMsg=>{
+                _mm.errorTips(errMsg)
+            });
+        }
     }
 
 
@@ -40,6 +55,11 @@ class ActuatorSave extends React.Component{
             seq:this.state.seq
         }
         //TODO 表单验证
+
+        if(this.state.id){
+            groupInfo.id = this.state.id;
+        }
+
         //提交信息
         _actuator.save(groupInfo).then(res=>{
             this.props.history.push('/actuator/index');
@@ -53,6 +73,7 @@ class ActuatorSave extends React.Component{
             <div id="page-wrapper">
 
                 <PageTitle title="添加任务"/>
+
                 <div className="form-horizontal">
                     <div className="form-group">
                         <label  className="col-md-2 control-label">执行器名称(唯一)</label>

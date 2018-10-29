@@ -34,6 +34,18 @@ class ActuatorList extends React.Component{
         });
     }
 
+
+    deleteByID(id){
+        if(window.confirm("确定要删除此执行器")){
+            _actuator.delete(id).then(res=>{
+                this.loadActuatorList();
+            },errMsg=>{
+                _mm.errorTips(errMsg)
+            });
+        }
+    }
+
+
     //页码变化
     onPageNumChange(pageNum){
         this.setState({
@@ -70,8 +82,8 @@ class ActuatorList extends React.Component{
                                         <td>{new Date(actuator.updateTime).toLocaleString()}</td>
                                         <td>
                                             <a className="operation btn btn-xs btn-info" >详情</a>
-
-                                            <a className="operation btn btn-xs btn-success" >编辑</a>
+                                            <Link className="operation btn btn-xs btn-success" to={`/actuator/save/${actuator.id}`} >编辑</Link>
+                                            <a className="operation btn btn-xs btn-info" onClick={(e)=>this.deleteByID(actuator.id)}>删除</a>
                                         </td>
                                 </tr>
                             );

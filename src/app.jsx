@@ -30,7 +30,7 @@ class App extends React.Component{
                                 <Redirect exact from="/task" to="/task/index"/>
 
                                 <Route path="/actuator/index" component={ActuatorList}/>
-                                <Route path="/actuator/save" component={ActuatorSave}/>
+                                <Route path="/actuator/save/:id?" component={ActuatorSave}/>
                                 <Redirect exact from="/actuator" to="/actuator/index"/>
 
                                 <Route path="/operation/index" component={OperationList}/>
