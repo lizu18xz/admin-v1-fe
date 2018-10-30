@@ -44,6 +44,17 @@ class Actuator{
         })
     }
 
+    server(name){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/jobGroup/server',
+            data:{
+                name:name
+            }
+        })
+    }
+
+
 
 
 }

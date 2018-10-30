@@ -113,11 +113,27 @@ class TaskList extends React.Component{
 
 
     runTask(jobId){
-        _task.runTask(jobId).then(res=>{
-            _mm.successTips("执行成功")
-        },errMsg=>{
-            _mm.errorTips(errMsg)
-        });
+        if(window.confirm("是否执行一次任务")){
+            _task.runTask(jobId).then(res=>{
+                _mm.successTips("执行成功")
+            },errMsg=>{
+                _mm.errorTips(errMsg)
+            });
+        }
+    }
+
+    deleteTask(jobId,jobGroup){
+        if(window.confirm("是否删除此任务!!!")){
+            let params={
+                jobId:jobId,
+                jobGroup:jobGroup
+            }
+            _task.deleteTask(params).then(res=>{
+                _mm.successTips("执行成功")
+            },errMsg=>{
+                _mm.errorTips(errMsg)
+            });
+        }
     }
 
 
@@ -156,12 +172,12 @@ class TaskList extends React.Component{
                                     <td>{new Date(task.createTime).toLocaleString()}</td>
                                     <td>
                                         <a className="operation btn btn-xs btn-info">详情</a>
-                                        <a className="operation btn btn-xs btn-success">编辑</a>
+                                        <Link to={`/task/editor/${task.id}`} className="operation btn btn-xs btn-success">编辑</Link>
                                         <button className="operation btn btn-xs btn-success" onClick={(e)=>this.onSetTaskStatus(e,task.id,task.jobGroup,task.jobStatus)}>
                                             {task.jobStatus == 1 ? '下线':'上线'}
                                         </button>
-                                        <a className="operation btn btn-xs btn-success">删除</a>
-                                        <a className="operation btn btn-xs btn-success" onClick={(e)=>this.runTask(task.id)}>执行</a>
+                                        <a className="operation btn btn-xs btn-success" onClick={(e)=>this.deleteTask(task.id)}>删除</a>
+                                        <a className="operation btn btn-xs btn-info" onClick={(e)=>this.runTask(task.id,task.jobGroup)}>执行</a>
                                     </td>
                                 </tr>
                             );

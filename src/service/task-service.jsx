@@ -20,6 +20,15 @@ class Task{
         })
     }
 
+    //修改任务
+    editor(jobInfo){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/editor',
+            data:jobInfo
+        })
+    }
+
 
     getTaskExecutor(){
         return _mm.request({
@@ -47,11 +56,13 @@ class Task{
     }
 
     //任务详情
-    detail(JobInfoParams){
+    detail(jobId){
         return _mm.request({
             type: 'post',
-            url:'/manager/job/delete',
-            data:JobInfoParams
+            url:'/manager/job/detail',
+            data:{
+                jobId:jobId
+            }
         })
     }
 
@@ -66,7 +77,14 @@ class Task{
         })
     }
 
-
+    //删除任务
+    deleteTask(params){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/delete',
+            data:params
+        })
+    }
 
 }
 

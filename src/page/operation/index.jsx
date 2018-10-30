@@ -28,8 +28,7 @@ class OperationList extends React.Component{
             remoteIp:'',
             loadBalance:'',
             ha:'',
-            retry:''
-
+            retry:'',
         }
 
     }
@@ -164,6 +163,7 @@ class OperationList extends React.Component{
                                             <input type="text" className="form-control"
                                                    name="executor"
                                                    value={this.state.executorType}
+                                                   readOnly={true}
                                             />
                                         </div>
                                     </div>
@@ -173,6 +173,7 @@ class OperationList extends React.Component{
                                             <input type="text" className="form-control"
                                                    name="address"
                                                    value={this.state.remoteIp}
+                                                   readOnly={true}
                                             />
                                         </div>
                                     </div>
@@ -182,6 +183,7 @@ class OperationList extends React.Component{
                                             <input type="text" className="form-control"
                                                    name="loadBalance"
                                                    value={this.state.loadBalance}
+                                                   readOnly={true}
                                             />
                                         </div>
                                     </div>
@@ -192,6 +194,7 @@ class OperationList extends React.Component{
                                             <input type="text" className="form-control"
                                                    name="Ha"
                                                    value={this.state.ha}
+                                                   readOnly={true}
                                             />
                                         </div>
                                     </div>
@@ -201,7 +204,8 @@ class OperationList extends React.Component{
                                         <div className="col-md-5">
                                             <input type="text" className="form-control"
                                                    name="retry"
-                                                   value={this.state.retry}
+                                                   value={this.state.retry||''}
+                                                   readOnly={true}
                                             />
                                         </div>
                                     </div>

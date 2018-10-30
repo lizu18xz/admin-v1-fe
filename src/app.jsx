@@ -8,6 +8,7 @@ import Home  from 'page/home/index.jsx';
 import Login from 'page/login/index.jsx';
 import TaskList from "page/task/index.jsx";
 import TaskSave from "page/task/save.jsx";
+import TaskEditor from "page/task/editor.jsx";
 import ActuatorList from "page/actuators/index.jsx";
 import ActuatorSave from "page/actuators/save.jsx";
 import OperationList from "page/operation/index.jsx";
@@ -27,6 +28,7 @@ class App extends React.Component{
                                 <Route exact path="/" component={Home} />
                                 <Route path="/task/index" component={TaskList}/>
                                 <Route path="/task/save/:type?" component={TaskSave}/>
+                                <Route path="/task/editor/:id?" component={TaskEditor}/>
                                 <Redirect exact from="/task" to="/task/index"/>
 
                                 <Route path="/actuator/index" component={ActuatorList}/>

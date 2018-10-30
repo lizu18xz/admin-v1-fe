@@ -24,7 +24,6 @@ class ActuatorSave extends React.Component{
     }
 
     loadActuators(){
-        console.log(this.state.id)
         //有id时候，编辑 功能需要表单回填
         if(this.state.id){
             _actuator.detail(this.state.id).then(res=>{
@@ -71,8 +70,10 @@ class ActuatorSave extends React.Component{
     render() {
         return (
             <div id="page-wrapper">
+                {this.state.id ?
+                    <PageTitle title="编辑任务"/>: <PageTitle title="添加任务"/>
+                }
 
-                <PageTitle title="添加任务"/>
 
                 <div className="form-horizontal">
                     <div className="form-group">

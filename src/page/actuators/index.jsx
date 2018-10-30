@@ -70,7 +70,7 @@ class ActuatorList extends React.Component{
 
                 </PageTitle>
 
-                <TableList tableHeads={['ID','执行器名称','执行器类型','创建时间','修改时间','操作']}>
+                <TableList tableHeads={['ID','执行器名称','执行器类型','在线执行器','创建时间','操作']}>
                     {
                         this.state.content.map((actuator,index)=>{
                             return(
@@ -78,10 +78,16 @@ class ActuatorList extends React.Component{
                                         <td>{actuator.id}</td>
                                         <td>{actuator.name}</td>
                                         <td>{actuator.groupDesc}</td>
-                                        <td>{new Date(actuator.createTime).toLocaleString()}</td>
-                                        <td>{new Date(actuator.updateTime).toLocaleString()}</td>
                                         <td>
-                                            <a className="operation btn btn-xs btn-info" >详情</a>
+                                            <i className="fa fa-play"></i>
+
+                                            {
+                                                actuator.serverList
+                                            }
+
+                                        </td>
+                                        <td>{new Date(actuator.createTime).toLocaleString()}</td>
+                                        <td>
                                             <Link className="operation btn btn-xs btn-success" to={`/actuator/save/${actuator.id}`} >编辑</Link>
                                             <a className="operation btn btn-xs btn-info" onClick={(e)=>this.deleteByID(actuator.id)}>删除</a>
                                         </td>
