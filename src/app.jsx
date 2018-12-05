@@ -11,6 +11,9 @@ import TaskSave from "page/task/save.jsx";
 import TaskEditor from "page/task/editor.jsx";
 import ActuatorList from "page/actuators/index.jsx";
 import ActuatorSave from "page/actuators/save.jsx";
+import TaskFlowList from "page/task-flow/index.jsx";
+import TaskFlowListSave from "page/task-flow/save.jsx";
+
 import OperationList from "page/operation/index.jsx";
 import LogPage from "page/operation/log.jsx";
 import ErrorPage from "page/error/index.jsx";
@@ -34,6 +37,10 @@ class App extends React.Component{
                                 <Route path="/actuator/index" component={ActuatorList}/>
                                 <Route path="/actuator/save/:id?" component={ActuatorSave}/>
                                 <Redirect exact from="/actuator" to="/actuator/index"/>
+
+                                <Route path="/task-flow/index" component={TaskFlowList}/>
+                                <Route path="/task-flow/save/:id?" component={TaskFlowListSave}/>
+                                <Redirect exact from="/task-flow" to="/task-flow/index"/>
 
                                 <Route path="/operation/index" component={OperationList}/>
                                 <Route path="/operation/log/:logId?" component={LogPage}/>

@@ -34,7 +34,10 @@ class NavSide extends React.Component{
                                     <NavLink to="/actuator" activeClassName="active-menu" >执行器管理</NavLink>
                                 </li>
                                 <li>
-                                    <NavLink to="/task" activeClassName="active-menu" >任务列表</NavLink>
+                                    <NavLink to="/task-flow" activeClassName="active-menu" >任务流管理</NavLink>
+                                </li>
+                                <li>
+                                    <NavLink to="/task" activeClassName="active-menu" >任务管理</NavLink>
                                 </li>
 
                             </ul>
