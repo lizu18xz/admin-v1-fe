@@ -45,6 +45,21 @@ class TaskFlowList extends React.Component{
         }
     }
 
+    updateFlowStatus(e,id,status){
+        let newStatus    = status,
+            confirmTips  = status ==1
+                ?'确定要下线该任务流?':'确定要上线该任务流?';
+
+        if(window.confirm(confirmTips)){
+
+            _taskFlow.upOrDown(id,status).then(res=>{
+                    this.loadTaskFlowList();
+                },errMsg=>{
+                    _mm.errorTips(errMsg)
+                });
+            }
+    }
+
 
     //页码变化
     onPageNumChange(pageNum){
@@ -70,19 +85,23 @@ class TaskFlowList extends React.Component{
 
                 </PageTitle>
 
-                <TableList tableHeads={['ID','名称','调度方式','调度频率','开始时间','创建时间','操作']}>
+                <TableList tableHeads={['ID','任务流名称','调度方式','调度频率','开始时间','状态','操作']}>
                     {
                         this.state.content.map((taskflow,index)=>{
                             return(
                                 <tr key={index}>
                                     <td>{taskflow.id}</td>
                                     <td>{taskflow.name}</td>
-                                    <td>{taskflow.jobCycle}</td>
+                                    <td>{taskflow.jobCycleDesc}</td>
                                     <td>{taskflow.jobCycleValue}</td>
                                     <td>{new Date(taskflow.startAt).toLocaleString()}</td>
-                                    <td>{new Date(taskflow.createTime).toLocaleString()}</td>
+                                    <td> {taskflow.flowStatus == 1 ? '上线':'下线'}</td>
                                     <td>
-                                        <Link className="operation btn btn-xs btn-success" to={`/taskflow/save/${taskflow.id}`} >编辑</Link>
+                                        <Link className="operation btn btn-xs btn-success" to={`/task-flow/design/${taskflow.id}`} >任务设计</Link>
+                                        <button className="operation btn btn-xs btn-success"
+                                                onClick={(e)=>this.updateFlowStatus(e,taskflow.id,taskflow.flowStatus)} >
+                                            {taskflow.flowStatus == 1 ? '下线':'上线'}
+                                        </button>
                                         <a className="operation btn btn-xs btn-info" onClick={(e)=>this.deleteByID(taskflow.id)}>删除</a>
                                     </td>
                                 </tr>

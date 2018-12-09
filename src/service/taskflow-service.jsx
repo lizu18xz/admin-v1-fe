@@ -44,6 +44,18 @@ class TaskFlow{
         })
     }
 
+
+    upOrDown(id,status){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/jobFlow/upOrDown',
+            data:{
+                id:id,
+                status:status
+            }
+        })
+    }
+
 }
 
 export default TaskFlow;

@@ -20,7 +20,7 @@ if (cn) {
 } else {
     now.locale('en-gb').utcOffset(0);
 }
-
+const defaultCalendarValue = now.clone();
 class TaskFlowSave extends React.Component{
 
     constructor(props){
@@ -78,6 +78,19 @@ class TaskFlowSave extends React.Component{
         })
     }
 
+    onCycleSelect(e){
+        let newValue=e.target.value;
+        this.setState({
+            jobCycle:newValue,
+        })
+    }
+
+    onPrioritySelect(e){
+        let newValue=e.target.value;
+        this.setState({
+            flowPriority:newValue,
+        })
+    }
 
     onSubmit(){
         let flowInfo={
@@ -145,12 +158,18 @@ class TaskFlowSave extends React.Component{
 
                     <div className="form-group">
                         <label  className="col-md-2 control-label">调度方式</label>
-                        <div className="col-md-5">
-                            <input type="text" className="form-control"
-                                   placeholder="调度方式"
-                                   name="jobCycle"
-                                   value={this.state.jobCycle}
-                                   onChange={(e)=>this.onValueChange(e)}/>
+                        <div className="col-md-10">
+                            <select className="form-control save-selector"
+                                    value={this.state.jobCycle}
+                                    onChange={(e) => this.onCycleSelect(e)}>
+                                <option value="">请选择调度方式</option>
+                                <option value="1">单次任务</option>
+                                <option value="2">分钟任务</option>
+                                <option value="3">小时任务</option>
+                                <option value="4">天任务</option>
+                                <option value="5">周任务</option>
+                                <option value="6">月任务</option>
+                            </select>
                         </div>
                     </div>
 
@@ -168,13 +187,18 @@ class TaskFlowSave extends React.Component{
 
                     <div className="form-group">
                         <label  className="col-md-2 control-label">优先级</label>
-                        <div className="col-md-5">
-                            <input type="text" className="form-control"
-                                   placeholder="优先级"
-                                   name="flowPriority"
-                                   value={this.state.flowPriority}
-                                   onChange={(e)=>this.onValueChange(e)}/>
+
+                        <div className="col-md-10">
+                            <select className="form-control save-selector"
+                                    value={this.state.flowPriority}
+                                    onChange={(e) => this.onPrioritySelect(e)}>
+                                <option value="">请选优先级</option>
+                                <option value="1">高</option>
+                                <option value="2">中</option>
+                                <option value="3">低</option>
+                            </select>
                         </div>
+
                     </div>
 
                     <div className="form-group">
