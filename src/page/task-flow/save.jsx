@@ -41,7 +41,7 @@ class TaskFlowSave extends React.Component{
     }
 
     getFormat(time) {
-        return time ? format : 'YYYY-MM-DD';
+        return time ? format : 'yyyy-MM-dd HH:mm:ss';
     }
 
     onStandaloneChange(value) {
@@ -214,7 +214,7 @@ class TaskFlowSave extends React.Component{
                                 dateInputPlaceholder="请选择日期"
                                 format={this.getFormat(this.state.showTime)}
                                 showDateInput={this.state.showDateInput}
-                                onChange={(value) =>{this.onStandaloneChange(value)}}
+                                onSelect={(value) =>{this.onStandaloneChange(value)}}
                             />
                         </div>
                     </div>
