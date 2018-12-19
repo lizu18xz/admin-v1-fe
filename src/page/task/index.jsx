@@ -27,20 +27,14 @@ class TaskList extends React.Component{
         this.loadTaskExecutor();
     }
 
-    //加载执行器 TODO 初始化对应的内容
+    //加载执行器
     loadTaskExecutor(){
         _task.getTaskExecutor().then(res=>{
             this.setState({
                 executorContent:res.content
             },(e)=>{
-                let executors=res.content;
-                if(executors.length>0){
-                    this.setState({
-                        executorType: executors[0].name
-                    },(e)=>{
-                        this.loadTaskList()
-                    })
-                }
+                //此处可以等请求完成后处理想处理的事情
+                this.loadTaskList()
             })
         },errMsg=>{
             _mm.errorTips(errMsg)
@@ -82,35 +76,6 @@ class TaskList extends React.Component{
         });
     }
 
-    onSetTaskStatus(e,jobId,jobGroupId,status){
-        let newStatus    = status,
-            confirmTips  = status ==1
-                ?'确定要下线该任务?':'确定要上线该任务?';
-
-        let JobInfoParams={
-            jobId:jobId,
-            jobGroup:jobGroupId
-        }
-
-        if(window.confirm(confirmTips)){
-           if(newStatus==1){//现在是上线状态 调用下线接口
-               _task.pause(JobInfoParams).then(res=>{
-                   this.loadTaskList();
-               },errMsg=>{
-                   _mm.errorTips(errMsg)
-               });
-
-           }else if(newStatus == 2){//现在是下线状态 调用上线接口
-
-               _task.resume(JobInfoParams).then(res=>{
-                   this.loadTaskList();
-               },errMsg=>{
-                   _mm.errorTips(errMsg)
-               });
-           }
-        }
-    }
-
 
     runTask(jobId){
         if(window.confirm("是否执行一次任务")){
@@ -122,62 +87,34 @@ class TaskList extends React.Component{
         }
     }
 
-    deleteTask(jobId,jobGroup){
-        if(window.confirm("是否删除此任务!!!")){
-            let params={
-                jobId:jobId,
-                jobGroup:jobGroup
-            }
-            _task.deleteTask(params).then(res=>{
-                _mm.successTips("执行成功")
-            },errMsg=>{
-                _mm.errorTips(errMsg)
-            });
-        }
-    }
-
-
 
     render() {
-
-
 
         return (
             <div id="page-wrapper">
 
                 <PageTitle title="任务列表">
 
-                    <div className="page-header-right">
-                        <Link to={`/task/save/${this.state.executorType}`} className="btn btn-primary">
-                            <i className="fa fa-plus"></i>
-                            <span>添加任务</span>
-                        </Link>
-                    </div>
-
                 </PageTitle>
 
                 <ListSearch onSearch={(executorName)=>{this.onSearch(executorName)}}  selectContent={this.state.executorContent} />
 
-                <TableList tableHeads={['ID','任务描述','执行器类型','状态','任务类型','Cron','创建时间','操作']}>
+                <TableList tableHeads={['ID','任务描述','所属任务流','执行器类型','发布状态','任务类型','执行频率','修改时间','操作']}>
                     {
                         this.state.content.map((task,index)=>{
                             return(
                                 <tr key={index}>
                                     <td>{task.id}</td>
                                     <td>{task.jobDesc}</td>
+                                    <td>{task.flowName}</td>
                                     <td>{task.executorType}</td>
-                                    <td>正常</td>
+                                    <td>{task.flowStatus == 1 ? '下线':'上线'}</td>
                                     <td>{task.jobType}</td>
-                                    <td>{task.cron}</td>
-                                    <td>{new Date(task.createTime).toLocaleString()}</td>
+                                    <td>{task.cycle}</td>
+                                    <td>{new Date(task.updateTime).toLocaleString()}</td>
                                     <td>
                                         <a className="operation btn btn-xs btn-info">详情</a>
-                                        <Link to={`/task/editor/${task.id}`} className="operation btn btn-xs btn-success">编辑</Link>
-                                        <button className="operation btn btn-xs btn-success" onClick={(e)=>this.onSetTaskStatus(e,task.id,task.jobGroup,task.jobStatus)}>
-                                            {task.jobStatus == 1 ? '下线':'上线'}
-                                        </button>
-                                        <a className="operation btn btn-xs btn-success" onClick={(e)=>this.deleteTask(task.id)}>删除</a>
-                                        <a className="operation btn btn-xs btn-info" onClick={(e)=>this.runTask(task.id,task.jobGroup)}>执行</a>
+                                        <a className="operation btn btn-xs btn-success" onClick={(e)=>this.runTask(task.id,task.jobGroup)}>单独执行</a>
                                     </td>
                                 </tr>
                             );

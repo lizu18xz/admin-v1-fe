@@ -11,47 +11,10 @@ class Task{
         })
     }
 
-    //新增任务
-    save(jobInfo){
-        return _mm.request({
-            type: 'post',
-            url:'/manager/job/save',
-            data:jobInfo
-        })
-    }
-
-    //修改任务
-    editor(jobInfo){
-        return _mm.request({
-            type: 'post',
-            url:'/manager/job/editor',
-            data:jobInfo
-        })
-    }
-
-
     getTaskExecutor(){
         return _mm.request({
             type: 'post',
             url:'/manager/jobGroup/list'
-        })
-    }
-
-    //暂停任务
-    pause(JobInfoParams){
-        return _mm.request({
-            type: 'post',
-            url:'/manager/job/pause',
-            data:JobInfoParams
-        })
-    }
-
-    //唤醒任务
-    resume(JobInfoParams){
-        return _mm.request({
-            type: 'post',
-            url:'/manager/job/resume',
-            data:JobInfoParams
         })
     }
 
@@ -77,12 +40,44 @@ class Task{
         })
     }
 
+
+    //任务流
+    //新增任务
+
+    save(jobInfo){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/save',
+            data:jobInfo
+        })
+    }
+
+    //修改任务
+    editor(jobInfo){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/editor',
+            data:jobInfo
+        })
+    }
+
+
     //删除任务
     deleteTask(params){
         return _mm.request({
             type: 'post',
             url:'/manager/job/delete',
             data:params
+        })
+    }
+
+
+    //查询任务流下面的任务列表
+    flowJobList(listParam){
+        return _mm.request({
+            type: 'post',
+            url:'/manager/job/flowJobList',
+            data:listParam
         })
     }
 

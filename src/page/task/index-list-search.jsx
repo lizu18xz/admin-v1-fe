@@ -14,7 +14,6 @@ class ListSearch extends React.Component{
     onSearch(){
         console.log("查询"+this.state.executorName)
 
-        //let data=this.state.executorName.split("_");//获取id
         this.props.onSearch(this.state.executorName)
     }
 
@@ -38,7 +37,7 @@ class ListSearch extends React.Component{
                         <div className="form-group">
                             <select className="form-control select-items"
                                     name="executorName" onChange={(e)=>this.onChangeValue(e)}>
-                                {/*<option  value="请选择执行器">请选择执行器</option>*/}
+                                <option  value="">全部</option>
                                 {
                                     this.props.selectContent.map((selects,index)=>{
                                         return(

@@ -7,13 +7,13 @@ import Layout from 'component/layout/index.jsx';
 import Home  from 'page/home/index.jsx';
 import Login from 'page/login/index.jsx';
 import TaskList from "page/task/index.jsx";
-import TaskSave from "page/task/save.jsx";
-import TaskEditor from "page/task/editor.jsx";
 import ActuatorList from "page/actuators/index.jsx";
 import ActuatorSave from "page/actuators/save.jsx";
 import TaskFlowList from "page/task-flow/index.jsx";
 import TaskFlowListSave from "page/task-flow/save.jsx";
 import TaskFlowTaskList from "page/task-flow/task/index.jsx"
+import TaskFlowTaskSave from "page/task-flow/task/save.jsx"
+import TaskFlowTaskEditor from "page/task-flow/task/editor.jsx"
 
 import OperationList from "page/operation/index.jsx";
 import LogPage from "page/operation/log.jsx";
@@ -31,8 +31,6 @@ class App extends React.Component{
                             <Switch>
                                 <Route exact path="/" component={Home} />
                                 <Route path="/task/index" component={TaskList}/>
-                                <Route path="/task/save/:type?" component={TaskSave}/>
-                                <Route path="/task/editor/:id?" component={TaskEditor}/>
                                 <Redirect exact from="/task" to="/task/index"/>
 
                                 <Route path="/actuator/index" component={ActuatorList}/>
@@ -42,6 +40,8 @@ class App extends React.Component{
                                 <Route path="/task-flow/index" component={TaskFlowList}/>
                                 <Route path="/task-flow/save/:id?" component={TaskFlowListSave}/>
                                 <Route path="/task-flow/design/:id?" component={TaskFlowTaskList}/>
+                                <Route path="/task-flow/task-save/:flowId?" component={TaskFlowTaskSave}/>
+                                <Route path="/task-flow/task-editor/:id?" component={TaskFlowTaskEditor}/>
                                 <Redirect exact from="/task-flow" to="/task-flow/index"/>
 
                                 <Route path="/operation/index" component={OperationList}/>

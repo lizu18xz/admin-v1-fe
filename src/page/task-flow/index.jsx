@@ -53,7 +53,8 @@ class TaskFlowList extends React.Component{
         if(window.confirm(confirmTips)){
 
             _taskFlow.upOrDown(id,status).then(res=>{
-                    this.loadTaskFlowList();
+                  _mm.successTips("操作成功!")
+                  this.loadTaskFlowList();
                 },errMsg=>{
                     _mm.errorTips(errMsg)
                 });

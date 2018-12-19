@@ -174,16 +174,20 @@ class TaskFlowSave extends React.Component{
                     </div>
 
 
-                    <div className="form-group">
-                        <label  className="col-md-2 control-label">执行周期值</label>
-                        <div className="col-md-5">
-                            <input type="text" className="form-control"
-                                   placeholder="执行周期值"
-                                   name="jobCycleValue"
-                                   value={this.state.jobCycleValue}
-                                   onChange={(e)=>this.onValueChange(e)}/>
-                        </div>
-                    </div>
+                    {
+                        this.state.jobCycle != "1" ?
+                            <div className="form-group">
+                                <label  className="col-md-2 control-label">执行周期值</label>
+                                <div className="col-md-5">
+                                    <input type="text" className="form-control"
+                                           placeholder="执行周期值"
+                                           name="jobCycleValue"
+                                           value={this.state.jobCycleValue}
+                                           onChange={(e)=>this.onValueChange(e)}/>
+                                </div>
+                            </div>:""
+                    }
+
 
                     <div className="form-group">
                         <label  className="col-md-2 control-label">优先级</label>
